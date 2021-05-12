@@ -55,7 +55,7 @@ public class ProductAPI extends HttpServlet {
 		String output = productDaoObj.createProduct(productObj);
 		
 		response.getWriter().write(output);
-		
+
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class ProductAPI extends HttpServlet {
 		String output = productDaoObj.updateProduct(productObj);
 		
 		response.getWriter().write(output);
-		
+
 	}
 
 	/**

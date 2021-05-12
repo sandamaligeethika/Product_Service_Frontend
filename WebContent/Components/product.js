@@ -10,19 +10,7 @@ $("#alertError").hide();
 //SAVE ======================================================
 $(document).on("click", "#btnSave", function(event)
 		{
-		// Clear alerts---------------------
-		$("#alertSuccess").text("");
-		$("#alertSuccess").hide();
-		$("#alertError").text("");
-		$("#alertError").hide();
-		// Form validation-------------------
-		var status = validateItemForm();
-		if (status != true)
-		{
-		$("#alertError").text(status);
-		$("#alertError").show();
-		return;
-		}
+
 		// If valid------------------------
 		var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
 		$.ajax(
@@ -47,7 +35,7 @@ $(document).on("click", ".btnUpdate", function(event){
 	$("#productName").val($(this).closest("tr").find('td:eq(1)').text());
 	$("#productDate").val($(this).closest("tr").find('td:eq(2)').text());
 	$("#productPrice").val($(this).closest("tr").find('td:eq(3)').text());
-	$("#researcherId").val($(this).closest("tr").find('td:eq(3)').text());
+	$("#researcherId").val($(this).closest("tr").find('td:eq(4)').text());
 });
 
 // DELETE==========================================

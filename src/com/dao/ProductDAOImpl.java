@@ -59,9 +59,10 @@ public class ProductDAOImpl {
 				
 				// Prepare the html table to be displayed
 				output = "<table border='1'><tr><th>Product ID</th>"
-				+ "<th>Product Name</th><th>Date</th><th>Price</th>"
+				+ "<th>Product Name</th>"
+				+ "<th>Date</th>"
+				+ "<th>Price</th>"
 				+ "<th>ResearcherId</th>"
-				+ "<th>Item Description</th>"
 				+ "<th>Update</th><th>Remove</th></tr>";
 
 				// query to retrieve all the products from the database
@@ -112,34 +113,6 @@ public class ProductDAOImpl {
 			return output;
 		}
 
-//		// get a particular product by passing the product id
-//		public Product getProductById(int id) throws SQLException {
-//
-//			// declare a product type object
-//			Product product = new Product();
-//
-//			//the connection object to the database
-//			Connection connection = db.connect();
-//
-//			// query to get a particular product by the product id
-//			String productList = "select * from product where product_id = '" + id + "'";
-//
-//			Statement st = connection.createStatement();
-//			ResultSet rs = st.executeQuery(productList);
-//
-//			while (rs.next()) {
-//
-//				product.setId(rs.getInt(1));
-//				product.setProductId(rs.getInt(2));
-//				product.setName(rs.getString(3));
-//				product.setDate(rs.getDate(4));
-//				product.setPrice(rs.getDouble(5));
-//				product.setResId(rs.getString(6));
-//
-//			}
-//
-//			return product;
-//		}
 
 		// update a product by passing a product type object as the parameter
 		public String updateProduct(Product product){
