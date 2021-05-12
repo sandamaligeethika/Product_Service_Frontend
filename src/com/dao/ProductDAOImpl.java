@@ -112,65 +112,90 @@ public class ProductDAOImpl {
 			return output;
 		}
 
-		// get a particular product by passing the product id
-		public Product getProductById(int id) throws SQLException {
-
-			// declare a product type object
-			Product product = new Product();
-
-			//the connection object to the database
-			Connection connection = db.connect();
-
-			// query to get a particular product by the product id
-			String productList = "select * from product where product_id = '" + id + "'";
-
-			Statement st = connection.createStatement();
-			ResultSet rs = st.executeQuery(productList);
-
-			while (rs.next()) {
-
-				product.setId(rs.getInt(1));
-				product.setProductId(rs.getInt(2));
-				product.setName(rs.getString(3));
-				product.setDate(rs.getDate(4));
-				product.setPrice(rs.getDouble(5));
-				product.setResId(rs.getString(6));
-
-			}
-
-			return product;
-		}
+//		// get a particular product by passing the product id
+//		public Product getProductById(int id) throws SQLException {
+//
+//			// declare a product type object
+//			Product product = new Product();
+//
+//			//the connection object to the database
+//			Connection connection = db.connect();
+//
+//			// query to get a particular product by the product id
+//			String productList = "select * from product where product_id = '" + id + "'";
+//
+//			Statement st = connection.createStatement();
+//			ResultSet rs = st.executeQuery(productList);
+//
+//			while (rs.next()) {
+//
+//				product.setId(rs.getInt(1));
+//				product.setProductId(rs.getInt(2));
+//				product.setName(rs.getString(3));
+//				product.setDate(rs.getDate(4));
+//				product.setPrice(rs.getDouble(5));
+//				product.setResId(rs.getString(6));
+//
+//			}
+//
+//			return product;
+//		}
 
 		// update a product by passing a product type object as the parameter
-		public void updateProduct(Product product) throws SQLException {
+		public String updateProduct(Product product){
+			String output = "";
 
-			Connection connection = db.connect();
+			try {
+				
+				Connection connection = db.connect();
 
-			// query to update the product details by setting the values respectively
-			String updateProduct = "update product set product_id = '" + product.getProductId() + "', product_name ='"
-					+ product.getName() + "', date = '" + product.getDate() + "', price = '" + product.getPrice()
-					+ "', resId = '" + product.getResId() + "' where id = '" + product.getId() + "'";
+				// query to update the product details by setting the values respectively
+				String updateProduct = "update product set product_id = '" + product.getProductId() + "', product_name ='"
+						+ product.getName() + "', date = '" + product.getDate() + "', price = '" + product.getPrice()
+						+ "', resId = '" + product.getResId() + "' where id = '" + product.getId() + "'";
 
-			PreparedStatement ps = connection.prepareStatement(updateProduct);
-			ps.executeUpdate();
+				PreparedStatement ps = connection.prepareStatement(updateProduct);
+				
+				ps.executeUpdate();
 
-			// close the connection
-			connection.close();
+				// close the connection
+				connection.close();
+				
+				String newItems = listProducts();
+				output = "{\"status\":\"success\", \"data\": \"" +
+				newItems + "\"}";
+			} catch (SQLException e) {
+				output = "{\"status\":\"error\", \"data\":\"Error while updating the item.\"}";
+				System.err.println(e.getMessage());
+			}
 
+			return output;
 		}
 
 		// delete a product by passing the id
-		public void deleteProduct(int id) throws SQLException {
+		public String deleteProduct(int id){
+			
+			String output = "";
+			
+			try {
+				Connection connection = db.connect();
 
-			Connection connection = db.connect();
-
-			// query to delete a product
-			String deleteProduct = "delete from product where id = '" + id + "'";
-			PreparedStatement ps = connection.prepareStatement(deleteProduct);
-			ps.execute();
-
-			// close the connection
-			connection.close();
+				// query to delete a product
+				String deleteProduct = "delete from product where id = '" + id + "'";
+				PreparedStatement ps = connection.prepareStatement(deleteProduct);
+				
+				ps.execute();
+				// close the connection
+				connection.close();
+				
+				String newItems = listProducts();
+				output = "{\"status\":\"success\", \"data\": \"" +
+				newItems + "\"}";
+			} catch (SQLException e) {
+				output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}";
+				System.err.println(e.getMessage());
+			}
+			return output;
 
 		}
 }
