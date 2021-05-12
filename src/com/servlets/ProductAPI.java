@@ -67,6 +67,7 @@ public class ProductAPI extends HttpServlet {
 		
 		Map parameters = getParasMap(request);
 		
+		productObj.setId(Integer.parseInt(parameters.get("hidItemIDSave").toString()));
 		productObj.setProductId(Integer.parseInt(parameters.get("productId").toString()));
 		productObj.setName(parameters.get("productName").toString());
 		productObj.setDate(Date.valueOf(parameters.get("productDate").toString()));

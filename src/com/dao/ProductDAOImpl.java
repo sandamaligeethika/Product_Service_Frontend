@@ -80,7 +80,7 @@ public class ProductDAOImpl {
 //					product.setPrice(rs.getDouble(5));
 //					product.setResId(rs.getString(6));
 					
-					int Id = rs.getInt(1);
+					int id = rs.getInt(1);
 					int productId = rs.getInt(2);
 					String name = rs.getString(3);
 					Date date = rs.getDate(4);
@@ -95,9 +95,9 @@ public class ProductDAOImpl {
 					output += "<td>" + resId + "</td>";
 					// buttons
 					output += "<td><input name='btnUpdate' type='button' value='Update' "
-					+ "class='btnUpdate btn btn-secondary' data-itemid='" + Id + "'></td>"
+					+ "class='btnUpdate btn btn-secondary' data-itemid='" + id + "'></td>"
 					+ "<td><input name='btnRemove' type='button' value='Remove' "
-					+ "class='btnRemove btn btn-danger' data-itemid='" + Id + "'></td></tr>";
+					+ "class='btnRemove btn btn-danger' data-itemid='" + id + "'></td></tr>";
 					}
 				
 					connection.close();
