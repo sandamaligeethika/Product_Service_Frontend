@@ -13,9 +13,9 @@
 <body>
 <div class="container">
 <div class="row">
-<div class="col-6">
+<div class="col-11">
 
-<h1>Items Management V10.1</h1>
+<h1>Product Management</h1>
 
 <form id="formItem" name="formItem">
 Product ID:

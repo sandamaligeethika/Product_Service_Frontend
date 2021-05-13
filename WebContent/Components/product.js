@@ -11,6 +11,20 @@ $("#alertError").hide();
 $(document).on("click", "#btnSave", function(event)
 		{
 
+		// Form validation-------------------
+		var status = validateItemForm();
+		if (status != true)
+		{
+		$("#alertError").text(status);
+		$("#alertError").show();
+		return;
+		}
+		// Clear alerts---------------------
+		$("#alertSuccess").text("");
+		$("#alertSuccess").hide();
+		$("#alertError").text("");
+		$("#alertError").hide();
+
 		// If valid------------------------
 		var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
 		$.ajax(
@@ -24,6 +38,7 @@ $(document).on("click", "#btnSave", function(event)
 		onItemSaveComplete(response.responseText, status);
 		}
 		});
+
 		});
 
 
@@ -74,18 +89,18 @@ if ($("#productDate").val().trim() == "")
 return "Insert Date";
 }
 // PRICE-------------------------------
-if ($("#itemPrice").val().trim() == "")
+if ($("#productPrice").val().trim() == "")
 {
 return "Insert Price.";
 }
 // is numerical value
-var tmpPrice = $("#itemPrice").val().trim();
+var tmpPrice = $("#productPrice").val().trim();
 if (!$.isNumeric(tmpPrice))
 {
 return "Insert a numerical value for Item Price.";
 }
 // convert to decimal price
-$("#itemPrice").val(parseFloat(tmpPrice).toFixed(2));
+$("#productPrice").val(parseFloat(tmpPrice).toFixed(2));
 // DESCRIPTION------------------------
 if ($("#researcherId").val().trim() == "")
 {

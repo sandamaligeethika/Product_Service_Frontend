@@ -58,7 +58,7 @@ public class ProductDAOImpl {
 				Connection connection = db.connect();
 				
 				// Prepare the html table to be displayed
-				output = "<table border='1'><tr><th>Product ID</th>"
+				output = "<table width=100% border='1'><tr><th>Product ID</th>"
 				+ "<th>Product Name</th>"
 				+ "<th>Date</th>"
 				+ "<th>Price</th>"
