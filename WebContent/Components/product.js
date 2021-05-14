@@ -9,21 +9,22 @@ $("#alertError").hide();
 
 //SAVE ======================================================
 $(document).on("click", "#btnSave", function(event)
-		{
+{
+	
+	// Clear alerts---------------------
+	$("#alertSuccess").text("");
+	$("#alertSuccess").hide();
+	$("#alertError").text("");
+	$("#alertError").hide();
 
 		// Form validation-------------------
-		var status = validateItemForm();
+		var status = validateProductForm();
 		if (status != true)
 		{
 		$("#alertError").text(status);
 		$("#alertError").show();
 		return;
 		}
-		// Clear alerts---------------------
-		$("#alertSuccess").text("");
-		$("#alertSuccess").hide();
-		$("#alertError").text("");
-		$("#alertError").hide();
 
 		// If valid------------------------
 		var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
@@ -35,7 +36,7 @@ $(document).on("click", "#btnSave", function(event)
 		dataType : "text",
 		complete : function(response, status)
 		{
-		onItemSaveComplete(response.responseText, status);
+		onProductSaveComplete(response.responseText, status);
 		}
 		});
 
@@ -65,13 +66,13 @@ $(document).on("click", ".btnRemove", function(event)
 	dataType : "text",
 	complete : function(response, status)
 	{
-	onItemDeleteComplete(response.responseText, status);
+	onProductDeleteComplete(response.responseText, status);
 	}
 	});
 });
 
 // CLIENT-MODEL================================================================
-function validateItemForm()
+function validateProductForm()
 {
 // CODE
 if ($("#productId").val().trim() == "")
@@ -111,7 +112,7 @@ return true;
 
 
 
-function onItemSaveComplete(response, status)
+function onProductSaveComplete(response, status)
 {
 if (status == "success")
 {
@@ -142,7 +143,7 @@ $("#formItem")[0].reset();
 
 
 
-function onItemDeleteComplete(response, status)
+function onProductDeleteComplete(response, status)
 {
 	if (status == "success")
 	{
